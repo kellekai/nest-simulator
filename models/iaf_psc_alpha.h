@@ -161,11 +161,6 @@ public:
   void set_status( const DictionaryDatum& );
 
 private:
-  friend class boost::serialization::access;
-  template <typename Archive>
-  void serialize( Archive &ar, const unsigned int version ) {
-      ar & boost::serialization::base_object<Archiving_Node>(*this);
-  }
   void init_state_( const Node& proto );
   void init_buffers_();
   void calibrate();
@@ -248,6 +243,17 @@ private:
      * @param Change in reversal potential E_L specified by this dict
      */
     void set( const DictionaryDatum&, const Parameters_&, double );
+  
+    template <typename Archive>
+    void serialize( Archive &ar, const unsigned int version ) {
+      ar & y0_; //!< Constant current
+      ar & dI_ex_;
+      ar & I_ex_;
+      ar & dI_in_;
+      ar & I_in_;
+      ar & y3_;
+      ar & r_; //!< Number of refractory steps remaining
+    }
   };
 
   // ----------------------------------------------------------------
@@ -296,6 +302,29 @@ private:
 
     double weighted_spikes_ex_;
     double weighted_spikes_in_;
+
+    template<typename Archive>
+    void serialize( Archive &ar, const unsigned int version ) {
+      ar & EPSCInitialValue_;
+      ar & IPSCInitialValue_;
+      ar & RefractoryCounts_;
+      ar & P11_ex_;
+      ar & P21_ex_;
+      ar & P22_ex_;
+      ar & P31_ex_;
+      ar & P32_ex_;
+      ar & P11_in_;
+      ar & P21_in_;
+      ar & P22_in_;
+      ar & P31_in_;
+      ar & P32_in_;
+      ar & P30_;
+      ar & P33_;
+      ar & expm1_tau_m_;
+      ar & weighted_spikes_ex_;
+      ar & weighted_spikes_in_;
+    }
+
   };
 
   // Access functions for UniversalDataLogger -------------------------------
@@ -332,6 +361,14 @@ private:
   }
 
   // Data members -----------------------------------------------------------
+  
+  friend class boost::serialization::access;
+  template <typename Archive>
+  void serialize( Archive &ar, const unsigned int version ) {
+      ar & boost::serialization::base_object<Archiving_Node>(*this);
+      ar & S_;
+      ar & V_;
+  }
 
   /**
    * @defgroup iaf_psc_alpha_data
