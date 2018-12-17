@@ -31,6 +31,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -155,10 +156,16 @@ public:
   port handles_test_event( CurrentEvent&, rport );
   port handles_test_event( DataLoggingRequest&, rport );
 
+  void serialize_node( boost::archive::text_oarchive & oa );
   void get_status( DictionaryDatum& ) const;
   void set_status( const DictionaryDatum& );
 
 private:
+  friend class boost::serialization::access;
+  template <typename Archive>
+  void serialize( Archive &ar, const unsigned int version ) {
+      ar & boost::serialization::base_object<Archiving_Node>(*this);
+  }
   void init_state_( const Node& proto );
   void init_buffers_();
   void calibrate();

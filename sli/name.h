@@ -30,6 +30,8 @@
 #include <map>
 #include <string>
 
+#include "../nestkernel/serialization.h"
+
 /**
  * Represent strings by ints to facilitate fast comparison.
  *
@@ -129,6 +131,13 @@ public:
   static void info( std::ostream& );
 
 private:
+  // FTI CHECKPOINTING ADDITION
+  friend class boost::serialization::access;
+  template <typename Archive>
+  void serialize( Archive &ar, const unsigned int version ) {
+      ar & handle_;
+  }
+
   handle_t insert( const std::string& );
 
   /**

@@ -25,6 +25,7 @@
 
 // Includes from nestkernel:
 #include "node.h"
+#include "serialization.h"
 
 namespace nest
 {

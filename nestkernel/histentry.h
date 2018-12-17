@@ -34,6 +34,7 @@
 
 // Includes from nestkernel:
 #include "nest_types.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -53,6 +54,16 @@ public:
   //! how often this entry was accessed (to enable removal, once read by all
   //! neurons which need it)
   size_t access_counter_;
+  private:
+  // FTI CHECKPOINTING ADDITION
+  friend class boost::serialization::access;
+  template <typename Archive>
+  void serialize( Archive &ar, const unsigned int version ) {
+      ar & t_;
+      ar & Kminus_;
+      ar & triplet_Kminus_;
+      ar & access_counter_;
+  }
 };
 }
 

@@ -44,6 +44,8 @@
 // Includes from sli:
 #include "dictdatum.h"
 
+#include "serialization.h"
+
 #define DEBUG_ARCHIVER 1
 
 namespace nest
@@ -198,6 +200,28 @@ protected:
   void clear_history();
 
 private:
+  
+  // FTI CHECKPOINTING ADDITION
+  friend class boost::serialization::access;
+  template <typename Archive>
+  void serialize( Archive &ar, const unsigned int version ) {
+      ar & boost::serialization::base_object<Node>(*this);
+      ar & n_incoming_;
+      ar & Kminus_;
+      ar & triplet_Kminus_;
+      ar & tau_minus_;
+      ar & tau_minus_inv_;
+      ar & tau_minus_triplet_;
+      ar & tau_minus_triplet_inv_;
+      ar & last_spike_;
+      ar & history_;
+      ar & Ca_t_;
+      ar & Ca_minus_;
+      ar & tau_Ca_;
+      ar & beta_Ca_;
+      ar & synaptic_elements_map_;
+  }
+
   // number of incoming connections from stdp connectors.
   // needed to determine, if every incoming connection has
   // read the spikehistory for a given point in time

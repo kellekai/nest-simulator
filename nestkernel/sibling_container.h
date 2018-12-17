@@ -30,6 +30,7 @@
 // Includes from nestkernel:
 #include "nest_types.h"
 #include "node.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
@@ -117,6 +118,11 @@ protected:
   }
   void
   update( Time const&, const long, const long )
+  {
+  }
+
+  void
+  serialize_node( boost::archive::text_oarchive & oa )
   {
   }
 

@@ -32,6 +32,7 @@
 // Includes from nestkernel:
 #include "nest_time.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"

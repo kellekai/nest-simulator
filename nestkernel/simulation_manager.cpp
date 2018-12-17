@@ -36,6 +36,7 @@
 #include "event_delivery_manager.h"
 #include "kernel_manager.h"
 #include "sibling_container.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictutils.h"
@@ -752,9 +753,34 @@ nest::SimulationManager::update_()
 #pragma omp parallel
   {
     const thread tid = kernel().vp_manager.get_thread_id();
-
+    
     do
     {
+      // FTI CHECKPOINTING ADDITION
+      if ( to_do_ == 5000 ) {
+          #pragma omp master
+          {
+            std::ofstream fs{"fakeckpt.file"};
+            boost::archive::text_oarchive oa{fs};
+            int maxTidx = kernel().vp_manager.get_num_threads();
+            for ( int tidx = 0; tidx < maxTidx; ++tidx ) {
+                std::cout << kernel().node_manager.get_nodes_on_thread( tidx ).size() << std::endl; 
+                const std::vector< Node* >& thread_local_nodes =
+                  kernel().node_manager.get_nodes_on_thread( tidx );
+                for (
+                  std::vector< Node* >::const_iterator it = thread_local_nodes.begin();
+                  it != thread_local_nodes.end();
+                  ++it )
+                {
+                  ( *it )->serialize_node(oa);
+                  //oa << *( Node* )( *it );
+                }
+            }
+            std::cout << "checkpoint (only master)..." << std::endl;
+          }
+          #pragma omp barrier
+          std::cout << "other stuff (both)..." << std::endl;
+      }
       if ( print_time_ )
       {
         gettimeofday( &t_slice_begin_, NULL );
@@ -918,6 +944,7 @@ nest::SimulationManager::update_()
 
       } // of if(wfr_is_used)
       // end of preliminary update
+    
 
       const std::vector< Node* >& thread_local_nodes =
         kernel().node_manager.get_nodes_on_thread( tid );

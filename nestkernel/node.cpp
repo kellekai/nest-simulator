@@ -215,6 +215,12 @@ Node::wfr_update( Time const&, const long, const long )
   throw UnexpectedEvent();
 }
 
+void
+Node::serialize_node( boost::archive::text_oarchive & oa )
+{
+  std::cout << "WRONG MODEL (" << this->get_name() << ")" << std::endl;
+  //throw UnexpectedEvent();
+}
 /**
  * Default implementation of check_connection just throws UnexpectedEvent
  */

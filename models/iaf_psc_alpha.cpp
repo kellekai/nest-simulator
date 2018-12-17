@@ -315,6 +315,12 @@ iaf_psc_alpha::calibrate()
  * Update and spike handling functions
  */
 
+void 
+iaf_psc_alpha::serialize_node( boost::archive::text_oarchive & oa )
+{  
+    oa << *this;
+}
+
 void
 iaf_psc_alpha::update( Time const& origin, const long from, const long to )
 {

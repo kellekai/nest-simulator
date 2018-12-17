@@ -41,6 +41,9 @@
 // Includes from sli:
 #include "dictdatum.h"
 
+// Serialization includes:
+#include "serialization.h"
+
 /** @file node.h
  * Declarations for base class Node
  */
@@ -318,6 +321,8 @@ public:
    *
    */
   virtual void update( Time const&, const long, const long ) = 0;
+  
+  virtual void serialize_node( boost::archive::text_oarchive & oa );
 
   /**
    * Bring the node from state $t$ to $t+n*dt$, sends SecondaryEvents
@@ -916,6 +921,12 @@ protected:
   const ConcreteNode& downcast( const Node& );
 
 private:
+  // FTI CHECKPOINTING ADDITION
+  friend class boost::serialization::access;
+  template <typename Archive>
+  void serialize( Archive &ar, const unsigned int version ) {
+      ar & frozen_;
+  }
   index gid_;          //!< Global element id (within network).
   index lid_;          //!< Local element id (within parent).
   index subnet_index_; //!< Index of node in parent's node array

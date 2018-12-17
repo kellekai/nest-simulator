@@ -93,6 +93,8 @@
 // Includes from sli:
 #include "dictdatum.h"
 
+#include "serialization.h"
+
 namespace nest
 {
 
@@ -260,6 +262,18 @@ public:
   }
 
 private:
+  // FTI CHECKPOINTING ADDITION
+  friend class boost::serialization::access;
+  template <typename Archive>
+  void serialize( Archive &ar, const unsigned int version ) {
+      ar & z_;
+      ar & z_t_;
+      ar & z_connected_;
+      ar & continuous_;
+      ar & growth_rate_;
+      ar & tau_vacant_;
+  }
+
   // The current number of synaptic elements at t = z_t_
   double z_;
   // Last time stamp when the number of synaptic elements was updated

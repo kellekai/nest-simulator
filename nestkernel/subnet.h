@@ -30,6 +30,7 @@
 // Includes from nestkernel:
 #include "multirange.h"
 #include "node.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
