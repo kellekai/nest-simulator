@@ -691,9 +691,18 @@ public:
       , timestamp( Time::neg_inf() )
     {
     }
+    
+    // FTI CHECKPOINTING ADDITION
+    template<typename Archive>
+    void serialize( Archive & ar, const unsigned int version ) {
+        ar & data;
+        ar & timestamp;
+    }
+
     DataItem data;
     Time timestamp;
   };
+
 
   //! Container for entries
   typedef std::vector< Item > Container;

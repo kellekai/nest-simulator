@@ -645,6 +645,9 @@ nest::SimulationManager::call_update_()
      << "Not using MPI";
 #endif
 
+  std::cout << "NUMBER MPI PROCS: " << kernel().mpi_manager.get_num_processes() << std::endl;
+  std::cout << "MY RANK: " << kernel().mpi_manager.get_rank() << std::endl;
+
   LOG( M_INFO, "SimulationManager::start_updating_", os.str() );
 
 
@@ -760,7 +763,11 @@ nest::SimulationManager::update_()
       if ( to_do_ == 5000 ) {
           #pragma omp master
           {
-            std::ofstream fs{"fakeckpt.file"};
+            std::stringstream filename;
+            filename    << "fakeckpt-rank"
+                        << kernel().mpi_manager.get_rank() 
+                        << ".file";
+            std::ofstream fs{filename.str()};
             boost::archive::text_oarchive oa{fs};
             int maxTidx = kernel().vp_manager.get_num_threads();
             for ( int tidx = 0; tidx < maxTidx; ++tidx ) {

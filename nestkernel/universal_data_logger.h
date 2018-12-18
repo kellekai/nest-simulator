@@ -31,6 +31,7 @@
 #include "nest_time.h"
 #include "nest_types.h"
 #include "recordables_map.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -165,6 +166,12 @@ public:
   void init();
 
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive & ar, const unsigned int version ) {
+    ar & data_loggers_;
+  }
+
   /**
    * Single data logger, serving one Multimeter.
    * For each Multimeter connected to a node, one DataLogger_ instance is
@@ -186,6 +193,18 @@ private:
     void init();
 
   private:
+    friend class boost::serialization::access;
+    template<typename Archive>
+    void serialize( Archive & ar, const unsigned int version ) {
+      ar & multimeter_; //!< GID of multimeter for which the logger works
+      ar & num_vars_;  //!< number of variables recorded
+      ar & recording_interval_; //!< interval between two recordings
+      ar & recording_offset_; //!< offset relative to which interval is calculated
+      ar & rec_int_steps_;    //!< interval in steps
+      ar & next_rec_step_;    //!< next time step at which to record
+      ar & data_;
+      ar & next_rec_;
+    }
     index multimeter_; //!< GID of multimeter for which the logger works
     size_t num_vars_;  //!< number of variables recorded
 

@@ -271,6 +271,14 @@ private:
 
     //! Logger for all analog data
     UniversalDataLogger< iaf_psc_alpha > logger_;
+    
+    template<typename Archive>
+    void serialize( Archive & ar, const unsigned int version ) {
+      ar & logger_;
+      ar & ex_spikes_;
+      ar & in_spikes_;
+      ar & currents_;
+    }
   };
 
   // ----------------------------------------------------------------
@@ -368,6 +376,7 @@ private:
       ar & boost::serialization::base_object<Archiving_Node>(*this);
       ar & S_;
       ar & V_;
+      ar & B_;
   }
 
   /**
