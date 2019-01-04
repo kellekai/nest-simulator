@@ -37,6 +37,7 @@
 #include "kernel_manager.h"
 #include "sibling_container.h"
 #include "serialization.h"
+#include "archiving_node.h"
 
 // Includes from sli:
 #include "dictutils.h"
@@ -645,11 +646,7 @@ nest::SimulationManager::call_update_()
      << "Not using MPI";
 #endif
 
-  std::cout << "NUMBER MPI PROCS: " << kernel().mpi_manager.get_num_processes() << std::endl;
-  std::cout << "MY RANK: " << kernel().mpi_manager.get_rank() << std::endl;
-
   LOG( M_INFO, "SimulationManager::start_updating_", os.str() );
-
 
   if ( to_do_ == 0 )
   {
@@ -759,21 +756,25 @@ nest::SimulationManager::update_()
     
     do
     {
+      //std::cout << "to_do_: " << to_do_ << std::endl;
       // FTI CHECKPOINTING ADDITION
-      if ( to_do_ == 5000 ) {
+      if ( to_do_ == 10 ) {
           #pragma omp master
           {
+            kernel().connection_manager.get_mem_space_connections();
+            kernel().model_manager.memory_info();
             std::stringstream filename;
             filename    << "fakeckpt-rank"
                         << kernel().mpi_manager.get_rank() 
                         << ".file";
             std::ofstream fs{filename.str()};
-            boost::archive::text_oarchive oa{fs};
+            boost::archive::binary_oarchive oa{fs};
             int maxTidx = kernel().vp_manager.get_num_threads();
             for ( int tidx = 0; tidx < maxTidx; ++tidx ) {
-                std::cout << kernel().node_manager.get_nodes_on_thread( tidx ).size() << std::endl; 
                 const std::vector< Node* >& thread_local_nodes =
                   kernel().node_manager.get_nodes_on_thread( tidx );
+                std::cout << "# Nodes at thread '" << tidx << "': " << kernel().node_manager.get_nodes_on_thread( tidx ).size() << std::endl; 
+                std::cout << "# [" << tidx << "] start: " << thread_local_nodes.front() << " end: " << thread_local_nodes.back() << std::endl;
                 for (
                   std::vector< Node* >::const_iterator it = thread_local_nodes.begin();
                   it != thread_local_nodes.end();
@@ -783,6 +784,8 @@ nest::SimulationManager::update_()
                   //oa << *( Node* )( *it );
                 }
             }
+            oa.register_type<nest::Archiving_Node>(NULL);
+            oa << kernel().connection_manager;
             std::cout << "checkpoint (only master)..." << std::endl;
           }
           #pragma omp barrier

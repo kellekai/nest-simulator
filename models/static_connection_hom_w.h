@@ -179,6 +179,13 @@ public:
       "be changed via "
       "CopyModel()." );
   }
+private:
+  friend class boost::serialization::access;
+  template < typename Archive >
+  void serialize ( Archive & ar, unsigned int version ) 
+  {
+    ar & boost::serialization::base_object< Connection<targetidentifierT> >(*this);
+  }
 };
 
 

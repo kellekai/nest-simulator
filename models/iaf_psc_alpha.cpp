@@ -19,7 +19,6 @@
  *  along with NEST.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
 #include "iaf_psc_alpha.h"
 
 // C++ includes:
@@ -39,6 +38,8 @@
 #include "dictutils.h"
 #include "doubledatum.h"
 #include "integerdatum.h"
+
+BOOST_CLASS_EXPORT(nest::iaf_psc_alpha);
 
 nest::RecordablesMap< nest::iaf_psc_alpha >
   nest::iaf_psc_alpha::recordablesMap_;
@@ -223,6 +224,7 @@ iaf_psc_alpha::iaf_psc_alpha()
   , B_( *this )
 {
   recordablesMap_.create();
+  boost::serialization::void_cast_register<iaf_psc_alpha,Archiving_Node>();
 }
 
 iaf_psc_alpha::iaf_psc_alpha( const iaf_psc_alpha& n )
@@ -316,8 +318,9 @@ iaf_psc_alpha::calibrate()
  */
 
 void 
-iaf_psc_alpha::serialize_node( boost::archive::text_oarchive & oa )
-{  
+iaf_psc_alpha::serialize_node( boost::archive::binary_oarchive & oa )
+{ 
+    //oa.register_type<iaf_psc_alpha>(NULL);
     oa << *this;
 }
 

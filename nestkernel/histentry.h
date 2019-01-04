@@ -43,6 +43,9 @@ namespace nest
 class histentry
 {
 public:
+  histentry()
+  {
+  }
   histentry( double t,
     double Kminus,
     double triplet_Kminus,

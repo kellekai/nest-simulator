@@ -127,12 +127,14 @@ public:
   Connection()
     : target_()
     , syn_id_delay_( 1.0 )
+    , serialization_impl_msg_flag( true )
   {
   }
 
   Connection( const Connection< targetidentifierT >& rhs )
     : target_( rhs.target_ )
     , syn_id_delay_( rhs.syn_id_delay_ )
+    , serialization_impl_msg_flag( rhs.serialization_impl_msg_flag )
   {
   }
 
@@ -294,6 +296,9 @@ public:
   }
 
 protected:
+
+  bool serialization_impl_msg_flag;
+  
   /**
    * This function calls check_connection() on the sender to check if the
    * receiver
@@ -320,6 +325,15 @@ protected:
   targetidentifierT target_;
   //! syn_id (char) and delay (24 bit) in timesteps of this connection
   SynIdDelay syn_id_delay_;
+
+private:
+
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) {
+      ar & target_;
+      ar & syn_id_delay_;
+  }
 };
 
 

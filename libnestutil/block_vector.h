@@ -28,6 +28,7 @@
 #include <iostream>
 #include <iterator>
 #include <cassert>
+#include "../nestkernel/serialization.h"
 
 template < typename value_type_ >
 class BlockVector;
@@ -57,6 +58,14 @@ class bv_iterator
   friend class bv_iterator;
 
 private:
+  
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) {
+    ar & block_vector_;
+    ar & block_index_;
+  }
+
   template < typename cv_value_type_ >
   using iter_ = bv_iterator< value_type_, cv_value_type_&, cv_value_type_* >;
 
@@ -245,6 +254,14 @@ public:
   int get_max_block_size() const;
 
 private:
+
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) {
+    ar & blockmap_;
+    ar & finish_;
+  }
+
   //! Vector holding blocks containing data.
   std::vector< std::vector< value_type_ > > blockmap_;
   iterator finish_; //!< Iterator pointing to one past the last element.

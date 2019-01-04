@@ -164,6 +164,15 @@ public:
   }
 
 private:
+  friend class boost::serialization::access;
+  template < typename Archive >
+  void serialize ( Archive & ar, unsigned int version ) 
+  {
+      if( this->serialization_impl_msg_flag ) {
+        std::cout << "Quantal_StpConnection: Serialization is not yet implamented for this class!" << std::endl; 
+        this->serialization_impl_msg_flag = false;
+      }
+  }
   double weight_;      //!< synaptic weight
   double U_;           //!< unit increment of a facilitating synapse (U)
   double u_;           //!< dynamic value of probability of release

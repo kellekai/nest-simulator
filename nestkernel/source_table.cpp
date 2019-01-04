@@ -40,6 +40,19 @@ nest::SourceTable::~SourceTable()
 }
 
 void
+nest::SourceTable::mem_space() 
+{
+    size_t mem = 0;
+    int i,j;
+    for( i=0; i<sources_.size(); ++i ){
+        for(j=0; j<sources_[i].size(); ++j ) {
+            mem += sources_[i][j].size()*sizeof(Source);
+        }
+    }
+    std::cout << "memory of connections (sources): " << mem << " Bytes" << std::endl;
+}
+
+void
 nest::SourceTable::initialize()
 {
   assert( sizeof( Source ) == 8 );

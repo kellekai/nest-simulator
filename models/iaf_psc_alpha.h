@@ -156,7 +156,7 @@ public:
   port handles_test_event( CurrentEvent&, rport );
   port handles_test_event( DataLoggingRequest&, rport );
 
-  void serialize_node( boost::archive::text_oarchive & oa );
+  void serialize_node( boost::archive::binary_oarchive & oa );
   void get_status( DictionaryDatum& ) const;
   void set_status( const DictionaryDatum& );
 

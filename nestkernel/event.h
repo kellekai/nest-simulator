@@ -686,6 +686,9 @@ public:
    */
   struct Item
   {
+    Item() 
+    {
+    }
     Item( size_t n )
       : data( n, std::numeric_limits< double >::max() )
       , timestamp( Time::neg_inf() )

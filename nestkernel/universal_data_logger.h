@@ -181,6 +181,9 @@ private:
   class DataLogger_
   {
   public:
+    DataLogger_()
+    {
+    }
     DataLogger_( const DataLoggingRequest&, const RecordablesMap< HostNode >& );
     index
     get_mm_gid() const

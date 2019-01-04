@@ -41,6 +41,7 @@
 #include "source_table.h"
 #include "target_table.h"
 #include "target_table_devices.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "arraydatum.h"
@@ -415,6 +416,13 @@ public:
 
   double get_stdp_eps() const;
 
+  // JUST TO SEE HOW MUCH MEM IS ALLOCATED ## TO BE REMOVED ##
+  void get_mem_space_connections() {
+      target_table_devices_.mem_space();
+      target_table_.mem_space();
+      source_table_.mem_space();
+  }
+  
   void set_stdp_eps( const double stdp_eps );
 
 private:
@@ -547,6 +555,38 @@ private:
    */
   void increase_connection_count( const thread tid, const synindex syn_id );
 
+  friend class boost::serialization::access;
+  template < typename Archive >
+  void serialize( Archive & ar, unsigned int version )
+  { 
+      for(int i=0; i<connections_.size(); ++i) {
+          for(int j=0; j<connections_[i].size(); ++j) {
+              if( NULL != connections_[i][j] ) {
+                  connections_[i][j]->init_boost_iarchive( ar );
+              }
+              std::cout << "[" << i << "][" << j << "]: " << typeid(connections_[i][j]).name() << std::endl;
+              ar & connections_[i][j];
+          }
+      }
+      //for( auto it = connections_.begin(); it != connections_.end(); it++ ) { 
+      //  for ( auto itt = it->begin(); itt != it->end(); itt++ ) {
+      //    try {
+      //      ar & *itt;
+      //    } catch ( boost::archive::archive_exception &e ) { 
+      //        switch( e.code ) {
+      //          case boost::archive::archive_exception::unregistered_class: 
+      //          case boost::archive::archive_exception::unregistered_cast:
+      //            (*itt)->init_boost_iarchive( ar );
+      //            ar << *itt;
+      //            break;
+      //          default:
+      //            throw;
+      //        }
+      //    }
+      //  }
+      //}
+  }
+  
   /**
    * A structure to hold the Connector objects which in turn hold the
    * connection information. Corresponds to a three dimensional
@@ -578,6 +618,11 @@ private:
    */
   TargetTable target_table_;
 
+  //friend class boost::serialization::access;
+  //template<typename Archive>
+  //void serialize( Archive & ar, const unsigned int version ) {
+  //    ar & target_table_devices;
+  //}
   TargetTableDevices target_table_devices_;
 
   std::vector< DelayChecker > delay_checkers_;

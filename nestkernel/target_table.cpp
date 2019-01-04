@@ -24,8 +24,28 @@
 #include "kernel_manager.h"
 #include "target_table.h"
 
+
 // Includes from libnestutil
 #include "vector_util.h"
+void nest::TargetTable::mem_space() {
+    size_t mem = 0;
+    int i,j,k;
+    for( i=0; i<targets_.size(); ++i ){
+        for(j=0; j<targets_[i].size(); ++j ) {
+            for(k=0; k<targets_[i][j].size(); ++k ) {
+                mem += sizeof(targets_[i][j][k]);
+            }
+        }
+    }
+    for( i=0; i<secondary_send_buffer_pos_.size(); ++i ){
+        for(j=0; j<secondary_send_buffer_pos_[i].size(); ++j ) {
+            for(k=0; k<secondary_send_buffer_pos_[i][j].size(); ++k ) {
+                mem += sizeof(secondary_send_buffer_pos_[i][j][k]);
+            }
+        }
+    }
+    std::cout << "memory of connections: " << mem << " Bytes" << std::endl;
+}
 
 void
 nest::TargetTable::initialize()

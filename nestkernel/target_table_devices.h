@@ -33,6 +33,7 @@
 #include "connector_base.h"
 #include "event.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 // Includes from SLI:
 #include "arraydatum.h"
@@ -53,6 +54,15 @@ class ConnectorModel;
 class TargetTableDevices
 {
 private:
+  
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive & ar, const unsigned int version ) {
+      ar & target_to_devices_;
+      ar & target_from_devices_;
+      ar & sending_devices_gids_;
+  }
+
   //! 3d structure storing connections from neurons to devices
   std::vector< std::vector< std::vector< ConnectorBase* > > >
     target_to_devices_;
@@ -68,6 +78,8 @@ private:
 public:
   TargetTableDevices();
   ~TargetTableDevices();
+  
+  void mem_space();
 
   /**
    * Initialize data structures.

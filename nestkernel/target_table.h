@@ -32,7 +32,7 @@
 // Includes from nestkernel:
 #include "nest_types.h"
 #include "spike_data.h"
-#include "target.h"
+#include "target.hpp"
 #include "target_data.h"
 
 namespace nest
@@ -67,6 +67,8 @@ private:
     secondary_send_buffer_pos_;
 
 public:
+    
+  void mem_space();
   /**
    * Initializes data structures.
    */

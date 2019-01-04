@@ -99,6 +99,27 @@ nest::TargetTableDevices::resize_to_number_of_neurons()
 }
 
 void
+nest::TargetTableDevices::mem_space() {
+    size_t mem = 0;
+    int i,j,k;
+    for( i=0; i<target_to_devices_.size(); ++i ){
+        for(j=0; j<target_to_devices_[i].size(); ++j ) {
+            for(k=0; k<target_to_devices_[i][j].size(); ++k ) {
+                mem += sizeof(target_to_devices_[i][j][k]);
+            }
+        }
+    }
+    for( i=0; i<target_from_devices_.size(); ++i ){
+        for(j=0; j<target_from_devices_[i].size(); ++j ) {
+            for(k=0; k<target_from_devices_[i][j].size(); ++k ) {
+                mem += sizeof(target_from_devices_[i][j][k]);
+            }
+        }
+    }
+    std::cout << "memory of connections: " << mem << " Bytes" << std::endl;
+}
+
+void
 nest::TargetTableDevices::resize_to_number_of_synapse_types()
 {
 #pragma omp parallel

@@ -72,13 +72,24 @@ public:
   long get_label() const;
 
 private:
+  friend class boost::serialization::access;
+  template < typename Archive >
+  void serialize ( Archive & ar, unsigned int version ) 
+  {
+      if( serialization_impl_msg_flag ) {
+        std::cout << "ConnectionLabel: Serialization is not yet implamented for this class!" << std::endl; 
+        serialization_impl_msg_flag = false;
+      }
+  }
   long label_;
+  bool serialization_impl_msg_flag;
 };
 
 template < typename ConnectionT >
 ConnectionLabel< ConnectionT >::ConnectionLabel()
   : ConnectionT()
   , label_( UNLABELED_CONNECTION )
+  , serialization_impl_msg_flag( true )
 {
 }
 

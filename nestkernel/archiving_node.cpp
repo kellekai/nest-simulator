@@ -28,6 +28,7 @@
  */
 
 #include "archiving_node.h"
+BOOST_CLASS_EXPORT(nest::Archiving_Node);
 
 // Includes from nestkernel:
 #include "kernel_manager.h"
@@ -55,6 +56,7 @@ nest::Archiving_Node::Archiving_Node()
   , beta_Ca_( 0.001 )
   , synaptic_elements_map_()
 {
+  boost::serialization::void_cast_register<Archiving_Node, Node>();
 }
 
 nest::Archiving_Node::Archiving_Node( const Archiving_Node& n )
@@ -422,7 +424,6 @@ void
 nest::Archiving_Node::update_synaptic_elements( double t )
 {
   assert( t >= Ca_t_ );
-
   for ( std::map< Name, SynapticElement >::iterator it =
           synaptic_elements_map_.begin();
         it != synaptic_elements_map_.end();

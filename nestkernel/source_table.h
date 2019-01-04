@@ -98,6 +98,8 @@ public:
   SourceTable();
   ~SourceTable();
 
+  void mem_space();
+  
   /**
    * Initialize data structure.
    */

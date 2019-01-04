@@ -21,6 +21,7 @@
  */
 
 #include "allocator.h"
+#include <iostream>
 
 sli::pool::pool()
   : initial_block_size( 1024 )
@@ -131,6 +132,7 @@ sli::pool::grow( size_t nelements )
   }
   reinterpret_cast< link* >( last )->next = NULL;
   head = reinterpret_cast< link* >( start );
+  std::cout << "memory_request: " << nelements * el_size << " Bytes (" << nelements << " Elements) :: begin: " << (void*)start << " end: " << (void*)last << std::endl;
 }
 
 void

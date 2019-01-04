@@ -302,6 +302,15 @@ public:
   }
 
 private:
+  friend class boost::serialization::access;
+  template < typename Archive >
+  void serialize ( Archive & ar, unsigned int version ) 
+  {
+      if( this->serialization_impl_msg_flag ) {
+        std::cout << "STDPFACETSHWConnectionHom: Serialization is not yet implamented for this class!" << std::endl; 
+        this->serialization_impl_msg_flag = false;
+      }
+  }
   bool eval_function_( double a_causal,
     double a_acausal,
     double a_thresh_th,

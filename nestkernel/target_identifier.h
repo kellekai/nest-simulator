@@ -30,6 +30,7 @@
 
 #include "kernel_manager.h"
 #include "compose.hpp"
+#include "serialization.h"
 
 namespace nest
 {
@@ -98,6 +99,14 @@ public:
   }
 
 private:
+  
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) {
+      ar & target_;
+      ar & rport_;
+  }
+
   Node* target_; //!< Target node
   rport rport_;  //!< Receiver port at the target node
 };
@@ -167,6 +176,13 @@ public:
   }
 
 private:
+  
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) {
+      ar & target_;
+  }
+
   targetindex target_; //!< Target node
 };
 

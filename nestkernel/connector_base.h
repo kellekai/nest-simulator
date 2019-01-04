@@ -212,6 +212,19 @@ public:
    */
   virtual void remove_disabled_connections(
     const index first_disabled_index ) = 0;
+
+  virtual void init_boost_iarchive( BOOST_OARCHIVE &ar ) 
+  {
+    std::cout << "INIT SERIALIZATION ConnectorBase" << std::endl;
+  }
+
+private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) 
+  {
+  }
+
 };
 
 /**
@@ -221,10 +234,25 @@ template < typename ConnectionT >
 class Connector : public ConnectorBase
 {
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    ar & C_;
+  }
   BlockVector< ConnectionT > C_;
   const synindex syn_id_;
 
 public:
+  
+  virtual void init_boost_iarchive( BOOST_OARCHIVE &ar ) 
+  {
+    std::cout << "INIT SERIALIZATION" << std::endl;
+    //ar.template register_type< ConnectionT >(NULL);    
+    ar.template register_type< Connector<ConnectionT> >(NULL);    
+    //boost::serialization::void_cast_register<ConnectionT,nest::Connection>();
+    boost::serialization::void_cast_register<Connector<ConnectionT>,ConnectorBase>();
+  }
+  
   explicit Connector( const synindex syn_id )
     : syn_id_( syn_id )
   {

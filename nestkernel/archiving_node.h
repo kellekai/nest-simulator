@@ -179,7 +179,7 @@ public:
    * constant of the intracellular calcium concentration
    */
   double get_tau_Ca() const;
-
+  
 protected:
   /**
    * \fn void set_spiketime(Time const & t_sp, double offset)

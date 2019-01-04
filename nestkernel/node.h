@@ -322,7 +322,7 @@ public:
    */
   virtual void update( Time const&, const long, const long ) = 0;
   
-  virtual void serialize_node( boost::archive::text_oarchive & oa );
+  virtual void serialize_node( boost::archive::binary_oarchive & oa );
 
   /**
    * Bring the node from state $t$ to $t+n*dt$, sends SecondaryEvents

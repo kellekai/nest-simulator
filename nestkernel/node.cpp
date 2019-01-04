@@ -216,7 +216,7 @@ Node::wfr_update( Time const&, const long, const long )
 }
 
 void
-Node::serialize_node( boost::archive::text_oarchive & oa )
+Node::serialize_node( boost::archive::binary_oarchive & oa )
 {
   std::cout << "WRONG MODEL (" << this->get_name() << ")" << std::endl;
   //throw UnexpectedEvent();
