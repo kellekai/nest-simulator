@@ -34,6 +34,7 @@
 #include "nest_types.h"
 #include "recording_device.h"
 #include "kernel_manager.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -67,6 +68,12 @@ class weight_recorder : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< weight_recorder, DeviceNode >(NULL);
+  }
+
   weight_recorder();
   weight_recorder( const weight_recorder& );
 

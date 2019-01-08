@@ -33,6 +33,7 @@
 #include "nest_types.h"
 #include "node.h"
 #include "pseudo_recording_device.h"
+#include "serialization.h"
 
 
 namespace nest
@@ -150,6 +151,12 @@ class correlation_detector : public Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< correlation_detector, Node >(NULL);
+  }
+
   correlation_detector();
   correlation_detector( const correlation_detector& );
 

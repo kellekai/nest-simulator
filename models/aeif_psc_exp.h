@@ -41,6 +41,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 
 namespace nest
@@ -135,6 +136,12 @@ class aeif_psc_exp : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< aeif_psc_exp, Archiving_Node >(NULL);
+  }
+
   aeif_psc_exp();
   aeif_psc_exp( const aeif_psc_exp& );
   ~aeif_psc_exp();

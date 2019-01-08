@@ -29,6 +29,7 @@
 #include "connection.h"
 #include "event.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 #include "nest.h"
 
@@ -149,6 +150,12 @@ class gif_psc_exp_multisynapse : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< gif_psc_exp_multisynapse, Archiving_Node >(NULL);
+  }
+
   gif_psc_exp_multisynapse();
   gif_psc_exp_multisynapse( const gif_psc_exp_multisynapse& );
 

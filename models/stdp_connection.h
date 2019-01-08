@@ -31,6 +31,7 @@
 #include "connection.h"
 #include "connector_model.h"
 #include "event.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
@@ -101,6 +102,12 @@ class STDPConnection : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< STDPConnection< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef CommonSynapseProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;
 

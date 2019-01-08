@@ -31,6 +31,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -131,6 +132,12 @@ class iaf_tum_2000 : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< iaf_tum_2000, Archiving_Node >(NULL);
+  }
+
   iaf_tum_2000();
   iaf_tum_2000( const iaf_tum_2000& );
 

@@ -29,6 +29,7 @@
 #include "event.h"
 #include "nest_types.h"
 #include "ring_buffer.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -78,6 +79,12 @@ class parrot_neuron : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< parrot_neuron, Archiving_Node >(NULL);
+  }
+
   parrot_neuron();
 
   /**

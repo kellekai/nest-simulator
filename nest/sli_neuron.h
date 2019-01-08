@@ -30,6 +30,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
@@ -98,6 +99,12 @@ class sli_neuron : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< sli_neuron, Archiving_Node >(NULL);
+  }
+
   sli_neuron();
   sli_neuron( const sli_neuron& );
 

@@ -27,6 +27,7 @@
 // Includes from nestkernel:
 #include "connection.h"
 #include "kernel_manager.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -78,6 +79,12 @@ template < typename targetidentifierT >
 class BernoulliConnection : public Connection< targetidentifierT >
 {
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< BernoulliConnection< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   // this line determines which common properties to use
   typedef CommonSynapseProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;

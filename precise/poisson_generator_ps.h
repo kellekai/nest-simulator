@@ -35,6 +35,7 @@
 #include "event.h"
 #include "nest_types.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -72,6 +73,12 @@ class poisson_generator_ps : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< poisson_generator_ps, DeviceNode >(NULL);
+  }
+
   poisson_generator_ps();
   poisson_generator_ps( const poisson_generator_ps& );
 

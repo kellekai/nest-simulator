@@ -32,7 +32,7 @@
 #include "nest_types.h"
 #include "stimulating_device.h"
 #include "universal_data_logger.h"
-
+#include "serialization.h"
 
 namespace nest
 {
@@ -76,8 +76,19 @@ SeeAlso: Device, StimulatingDevice, dc_generator, step_current_generator
 */
 class ac_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
+
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< ac_generator, DeviceNode >(NULL);
+  }
+
   ac_generator();
   ac_generator( const ac_generator& );
 

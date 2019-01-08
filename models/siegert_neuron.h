@@ -41,6 +41,7 @@
 #include "ring_buffer.h"
 #include "recordables_map.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -113,6 +114,12 @@ class siegert_neuron : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< siegert_neuron, Archiving_Node >(NULL);
+  }
+
   typedef Node base;
 
   siegert_neuron();

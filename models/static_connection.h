@@ -25,6 +25,7 @@
 
 // Includes from nestkernel:
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -54,6 +55,12 @@ class StaticConnection : public Connection< targetidentifierT >
   double weight_;
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< StaticConnection< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   // this line determines which common properties to use
   typedef CommonSynapseProperties CommonPropertiesType;
 

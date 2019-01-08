@@ -28,6 +28,7 @@
 
 // Includes from nestkernel:
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -97,6 +98,12 @@ class ContDelayConnection : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< ContDelayConnection< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef CommonSynapseProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;
 

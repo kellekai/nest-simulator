@@ -30,6 +30,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -114,8 +115,19 @@ SeeAlso: iaf_cond_alpha, aeif_cond_exp, aeif_cond_alpha
 */
 class aeif_cond_alpha_RK5 : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< aeif_cond_alpha_RK5, Archiving_Node >(NULL);
+  }
+
   typedef void ( aeif_cond_alpha_RK5::*func_ptr )( const double*, double* );
   aeif_cond_alpha_RK5();
   aeif_cond_alpha_RK5( const aeif_cond_alpha_RK5& );

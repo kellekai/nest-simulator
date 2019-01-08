@@ -41,6 +41,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -123,6 +124,12 @@ class iaf_cond_alpha : public Archiving_Node
   // Boilerplate function declarations --------------------------------
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< iaf_cond_alpha, Archiving_Node >(NULL);
+  }
+
   iaf_cond_alpha();
   iaf_cond_alpha( const iaf_cond_alpha& );
   ~iaf_cond_alpha();

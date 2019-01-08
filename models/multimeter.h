@@ -33,6 +33,7 @@
 #include "kernel_manager.h"
 #include "recording_device.h"
 #include "sibling_container.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictutils.h"
@@ -140,6 +141,12 @@ class Multimeter : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< Multimeter, DeviceNode >(NULL);
+  }
+
   Multimeter();
   Multimeter( const Multimeter& );
 

@@ -32,6 +32,8 @@
 #include "rate_transformer_node.h"
 #include "rate_transformer_node_impl.h"
 
+#include "serialization.h"
+
 namespace nest
 {
 

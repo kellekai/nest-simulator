@@ -41,6 +41,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -146,8 +147,19 @@ SeeAlso: iaf_cond_alpha, aeif_cond_exp
 */
 class aeif_cond_alpha : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< aeif_cond_alpha, Archiving_Node >(NULL);
+  }
+
   aeif_cond_alpha();
   aeif_cond_alpha( const aeif_cond_alpha& );
   ~aeif_cond_alpha();

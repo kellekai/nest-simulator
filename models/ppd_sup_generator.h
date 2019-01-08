@@ -36,6 +36,7 @@
 #include "event.h"
 #include "nest_types.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -84,6 +85,12 @@ class ppd_sup_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< ppd_sup_generator, DeviceNode >(NULL);
+  }
+
   ppd_sup_generator();
   ppd_sup_generator( const ppd_sup_generator& );
 

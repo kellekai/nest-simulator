@@ -38,6 +38,7 @@
 #include "ring_buffer.h"
 #include "connection.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 #include "nest.h"
 
@@ -187,6 +188,12 @@ class gif_cond_exp_multisynapse : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< gif_cond_exp_multisynapse, Archiving_Node >(NULL);
+  }
+
   gif_cond_exp_multisynapse();
   gif_cond_exp_multisynapse( const gif_cond_exp_multisynapse& );
   ~gif_cond_exp_multisynapse();

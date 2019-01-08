@@ -24,6 +24,7 @@
 #define KERNEL_MANAGER_H
 
 // Includes from nestkernel:
+#include "checkpoint_manager.h"
 #include "connection_manager.h"
 #include "event_delivery_manager.h"
 #include "io_manager.h"
@@ -179,6 +180,7 @@ public:
   bool is_initialized() const;
 
   LoggingManager logging_manager;
+  CheckpointManager checkpoint_manager;
   IOManager io_manager;
   MPIManager mpi_manager;
   VPManager vp_manager;

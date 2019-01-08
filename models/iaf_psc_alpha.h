@@ -31,6 +31,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -134,6 +135,12 @@ class iaf_psc_alpha : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< iaf_psc_alpha, Archiving_Node >(NULL);
+  }
+
   iaf_psc_alpha();
   iaf_psc_alpha( const iaf_psc_alpha& );
 

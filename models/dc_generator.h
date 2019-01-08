@@ -35,6 +35,7 @@
 #include "ring_buffer.h"
 #include "stimulating_device.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -76,6 +77,12 @@ class dc_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< dc_generator, DeviceNode >(NULL);
+  }
+
   dc_generator();
   dc_generator( const dc_generator& );
 

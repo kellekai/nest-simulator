@@ -36,6 +36,7 @@
 #include "nest_types.h"
 #include "node.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -74,6 +75,12 @@ class pulsepacket_generator : public Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< pulsepacket_generator, Node >(NULL);
+  }
+
   pulsepacket_generator();
   pulsepacket_generator( pulsepacket_generator const& );
 

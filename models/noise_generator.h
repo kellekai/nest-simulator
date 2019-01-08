@@ -36,6 +36,7 @@
 #include "nest_types.h"
 #include "stimulating_device.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -114,6 +115,12 @@ class noise_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< noise_generator, DeviceNode >(NULL);
+  }
+
   noise_generator();
   noise_generator( const noise_generator& );
 

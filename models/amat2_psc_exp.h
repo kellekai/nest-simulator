@@ -32,6 +32,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -149,6 +150,12 @@ class amat2_psc_exp : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< amat2_psc_exp, Archiving_Node >(NULL);
+  }
+
   amat2_psc_exp();
   amat2_psc_exp( const amat2_psc_exp& );
 

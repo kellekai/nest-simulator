@@ -41,6 +41,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -108,6 +109,12 @@ class iaf_chxk_2008 : public Archiving_Node
   // Boilerplate function declarations --------------------------------
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< iaf_chxk_2008, Archiving_Node >(NULL);
+  }
+
   iaf_chxk_2008();
   iaf_chxk_2008( const iaf_chxk_2008& );
   ~iaf_chxk_2008();

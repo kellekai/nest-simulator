@@ -29,6 +29,7 @@
 #include "common_synapse_properties.h"
 #include "connector_model.h"
 #include "event.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"

@@ -43,6 +43,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "stringdatum.h"
@@ -137,6 +138,12 @@ SeeAlso: ht_synapse
 class ht_neuron : public Archiving_Node
 {
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< ht_neuron, Archiving_Node >(NULL);
+  }
+
   ht_neuron();
   ht_neuron( const ht_neuron& );
   ~ht_neuron();

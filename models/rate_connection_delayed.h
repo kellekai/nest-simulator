@@ -25,6 +25,7 @@
 #define RATE_CONNECTION_DELAYED_H
 
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -64,6 +65,12 @@ class RateConnectionDelayed : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< RateConnectionDelayed< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   // this line determines which common properties to use
   typedef CommonSynapseProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;

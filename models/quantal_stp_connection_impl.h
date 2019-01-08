@@ -29,6 +29,7 @@
 #include "connection.h"
 #include "connector_model.h"
 #include "nest_names.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictutils.h"

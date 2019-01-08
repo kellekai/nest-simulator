@@ -28,6 +28,7 @@
 #include "connection.h"
 #include "event.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 // Includes from precise:
 #include "slice_ring_buffer.h"
@@ -77,6 +78,12 @@ Author: adapted from parrot_neuron by Kunkel
 class parrot_neuron_ps : public Archiving_Node
 {
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< parrot_neuron_ps, Archiving_Node >(NULL);
+  }
+
   parrot_neuron_ps();
 
   /**

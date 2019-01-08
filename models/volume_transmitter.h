@@ -29,6 +29,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "spikecounter.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "namedatum.h"
@@ -98,6 +99,12 @@ class volume_transmitter : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< volume_transmitter, Archiving_Node >(NULL);
+  }
+
   volume_transmitter();
   volume_transmitter( const volume_transmitter& );
 

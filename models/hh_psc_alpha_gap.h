@@ -42,6 +42,7 @@
 #include "ring_buffer.h"
 #include "recordables_map.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -139,6 +140,12 @@ class hh_psc_alpha_gap : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< hh_psc_alpha_gap, Archiving_Node >(NULL);
+  }
+
   typedef Node base;
 
   hh_psc_alpha_gap();

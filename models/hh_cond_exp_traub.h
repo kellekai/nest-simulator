@@ -39,6 +39,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -134,6 +135,12 @@ class hh_cond_exp_traub : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< hh_cond_exp_traub, Archiving_NodehNode >(NULL);
+  }
+
   hh_cond_exp_traub();
   hh_cond_exp_traub( const hh_cond_exp_traub& );
   ~hh_cond_exp_traub();

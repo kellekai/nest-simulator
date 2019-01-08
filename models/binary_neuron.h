@@ -44,6 +44,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dict.h"
@@ -66,6 +67,12 @@ class binary_neuron : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< binary_neuron, Archiving_Node >(NULL);
+  }
+
   binary_neuron();
   binary_neuron( const binary_neuron& );
 

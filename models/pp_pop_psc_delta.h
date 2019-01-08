@@ -33,6 +33,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -152,6 +153,12 @@ class pp_pop_psc_delta : public Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< pp_pop_psc_delta, Node >(NULL);
+  }
+
   pp_pop_psc_delta();
   pp_pop_psc_delta( const pp_pop_psc_delta& );
 

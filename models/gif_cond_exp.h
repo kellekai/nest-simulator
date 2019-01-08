@@ -37,6 +37,7 @@
 #include "archiving_node.h"
 #include "ring_buffer.h"
 #include "connection.h"
+#include "serialization.h"
 
 #include "universal_data_logger.h"
 
@@ -165,6 +166,12 @@ class gif_cond_exp : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< gif_psc_exp, Archiving_Node >(NULL);
+  }
+
   gif_cond_exp();
   gif_cond_exp( const gif_cond_exp& );
   ~gif_cond_exp();

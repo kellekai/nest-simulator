@@ -41,6 +41,7 @@
 #include "nest_types.h"
 #include "stimulating_device.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -137,6 +138,12 @@ class sinusoidal_gamma_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< sinusoidal_gamma_generator, DeviceNode >(NULL);
+  }
+
   sinusoidal_gamma_generator();
   sinusoidal_gamma_generator( const sinusoidal_gamma_generator& );
 

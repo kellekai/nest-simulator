@@ -36,6 +36,8 @@
 #include "ntree_impl.h"
 #include "topology_names.h"
 
+#include "serialization.h"
+
 namespace nest
 {
 
@@ -46,6 +48,12 @@ template < int D >
 class FreeLayer : public Layer< D >
 {
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< FreeLayer< D >, Layer< D > >(NULL);
+  }
+
   Position< D > get_position( index sind ) const;
   void set_status( const DictionaryDatum& );
   void get_status( DictionaryDatum& ) const;

@@ -55,7 +55,7 @@ endif ()
 
 target_link_libraries( nest
     nestutil nestkernel random sli_lib sli_readline
-    ${SLI_MODULES} ${EXTERNAL_MODULE_LIBRARIES} )
+    ${SLI_MODULES} ${EXTERNAL_MODULE_LIBRARIES} ${Boost_LIBRARIES})
 
 target_link_libraries( nest_lib
     nestutil nestkernel random sli_lib ${SLI_MODULES} ${EXTERNAL_MODULE_LIBRARIES} )

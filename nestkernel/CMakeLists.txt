@@ -71,6 +71,7 @@ set( nestkernel_sources
     growth_curve.h growth_curve.cpp
     growth_curve_factory.h
     kernel_manager.h kernel_manager.cpp
+    checkpoint_manager.h checkpoint_manager.cpp
     vp_manager.h vp_manager_impl.h vp_manager.cpp
     io_manager.h io_manager.cpp
     mpi_manager.h mpi_manager_impl.h mpi_manager.cpp

@@ -25,6 +25,7 @@
 
 // Includes from nestkernel:
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -69,6 +70,12 @@ template < typename targetidentifierT >
 class HTConnection : public Connection< targetidentifierT >
 {
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< HTConnection< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef CommonSynapseProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;
 

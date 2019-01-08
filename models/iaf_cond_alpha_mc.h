@@ -44,6 +44,7 @@
 #include "recordables_map.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
@@ -166,6 +167,12 @@ class iaf_cond_alpha_mc : public Archiving_Node
   // Boilerplate function declarations --------------------------------
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< iaf_cond_alpha_mc, Archiving_Node >(NULL);
+  }
+
   iaf_cond_alpha_mc();
   iaf_cond_alpha_mc( const iaf_cond_alpha_mc& );
   ~iaf_cond_alpha_mc();

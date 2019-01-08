@@ -26,6 +26,8 @@
 // Includes from models:
 #include "binary_neuron.h"
 
+#include "serialization.h"
+
 namespace nest
 {
 

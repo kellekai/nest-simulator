@@ -41,6 +41,7 @@
 // Includes from nestkernel:
 #include "device_node.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "arraydatum.h"
@@ -101,6 +102,12 @@ class music_cont_out_proxy : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< music_cont_out_proxy, DeviceNode >(NULL);
+  }
+
   music_cont_out_proxy();
   music_cont_out_proxy( const music_cont_out_proxy& );
 

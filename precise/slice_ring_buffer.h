@@ -35,6 +35,7 @@
 // Includes from nestkernel:
 #include "kernel_manager.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 namespace nest
 {

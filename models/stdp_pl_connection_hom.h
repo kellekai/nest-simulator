@@ -28,6 +28,7 @@
 
 // Includes from nestkernel:
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -111,6 +112,12 @@ class STDPPLConnectionHom : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< STDPPLConnectionHom< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef STDPPLHomCommonProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;
 

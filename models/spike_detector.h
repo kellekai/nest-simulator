@@ -32,6 +32,7 @@
 #include "exceptions.h"
 #include "nest_types.h"
 #include "recording_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -92,6 +93,12 @@ class spike_detector : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< spike_detector, DeviceNode >(NULL);
+  }
+
   spike_detector();
   spike_detector( const spike_detector& );
 

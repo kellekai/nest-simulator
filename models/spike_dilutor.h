@@ -30,6 +30,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -63,6 +64,12 @@ class spike_dilutor : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< spike_dilutor, DeviceNode >(NULL);
+  }
+
   spike_dilutor();
   spike_dilutor( const spike_dilutor& rhs );
 

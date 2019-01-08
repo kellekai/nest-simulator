@@ -26,6 +26,7 @@
 // Includes from nestkernel:
 #include "common_properties_hom_w.h"
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -68,6 +69,12 @@ class StaticConnectionHomW : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< StaticConnectionHomW< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   // this line determines which common properties to use
   typedef CommonPropertiesHomW CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;

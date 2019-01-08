@@ -30,6 +30,7 @@
 #include "event.h"
 #include "nest_types.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 #include <vector>
 #include "nest.h"
@@ -84,6 +85,12 @@ class inhomogeneous_poisson_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< inhomogeneous_poisson_generator, DeviceNode >(NULL);
+  }
+
   inhomogeneous_poisson_generator();
   inhomogeneous_poisson_generator( const inhomogeneous_poisson_generator& );
 

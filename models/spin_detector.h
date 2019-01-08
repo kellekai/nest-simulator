@@ -33,6 +33,7 @@
 #include "exceptions.h"
 #include "nest_types.h"
 #include "recording_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -106,6 +107,12 @@ class spin_detector : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< spin_detector, DeviceNode >(NULL);
+  }
+
   spin_detector();
   spin_detector( const spin_detector& );
 

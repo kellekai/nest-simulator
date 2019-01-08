@@ -27,6 +27,7 @@
 // Includes from nestkernel:
 #include "common_properties_hom_w.h"
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -148,6 +149,12 @@ template < typename targetidentifierT >
 class TsodyksConnectionHom : public Connection< targetidentifierT >
 {
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< TsodyksConnectionHom< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef TsodyksHomCommonProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;
 

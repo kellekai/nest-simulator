@@ -34,6 +34,7 @@
 #include "nest_time.h"
 #include "nest_types.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -184,6 +185,12 @@ class spike_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< spike_generator, DeviceNode >(NULL);
+  }
+
   spike_generator();
   spike_generator( const spike_generator& );
 

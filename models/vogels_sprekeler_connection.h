@@ -26,6 +26,7 @@
 // C-header for math.h since copysign() is in C99 but not C++98
 #include <math.h>
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -72,6 +73,12 @@ class VogelsSprekelerConnection : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< VogelsSprekelerConnection< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef CommonSynapseProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;
 

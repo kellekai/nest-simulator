@@ -32,6 +32,7 @@
 // Includes from nestkernel:
 #include "connection.h"
 #include "spikecounter.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -165,6 +166,12 @@ class STDPDopaConnection : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< STDPDopaConnection< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef STDPDopaCommonProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;
 

@@ -51,7 +51,9 @@ ModelManager::register_node_model( const Name& name,
       name );
     throw NamingConflict( msg );
   }
-
+  kernel().checkpoint_manager.register_type< ModelT >();
+  ModelT::register_cast();
+  std::cout << "REGISTER: " << name.toString() << std::endl;
   Model* model =
     new GenericModel< ModelT >( name.toString(), deprecation_info );
   return register_node_model_( model, private_model );
@@ -111,6 +113,9 @@ void
 ModelManager::register_connection_model( const std::string& name,
   const bool requires_symmetric )
 {
+  boost::serialization::void_cast_register< Connector< ConnectionT >, ConnectorBase >(); 
+  ConnectionT::register_cast();
+  std::cout << "REGISTER: " << typeid(ConnectionT).name() << " (Conn.) " << std::endl;
   register_connection_model< ConnectionT, GenericConnectorModel >(
     name, requires_symmetric );
 }

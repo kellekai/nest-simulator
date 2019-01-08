@@ -33,6 +33,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 // Includes from precise:
 #include "slice_ring_buffer.h"
@@ -161,6 +162,12 @@ class iaf_psc_delta_canon : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< iaf_psc_delta_canon, Archiving_Node >(NULL);
+  }
+
   /** Basic constructor.
       This constructor should only be used by GenericModel to create
       model prototype instances.

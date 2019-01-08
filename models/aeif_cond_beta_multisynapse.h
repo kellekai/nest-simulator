@@ -41,6 +41,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -174,8 +175,19 @@ SeeAlso: aeif_cond_alpha_multisynapse
 */
 class aeif_cond_beta_multisynapse : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< aeif_cond_beta_multisynapse, Archiving_Node >(NULL);
+  }
+
   aeif_cond_beta_multisynapse();
   aeif_cond_beta_multisynapse( const aeif_cond_beta_multisynapse& );
   virtual ~aeif_cond_beta_multisynapse();

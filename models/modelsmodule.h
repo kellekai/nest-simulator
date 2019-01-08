@@ -29,6 +29,8 @@
 // Includes from sli:
 #include "slimodule.h"
 
+#include "serialization.h"
+
 namespace nest
 {
 /**

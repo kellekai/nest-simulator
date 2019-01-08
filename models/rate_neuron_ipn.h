@@ -40,6 +40,7 @@
 #include "ring_buffer.h"
 #include "recordables_map.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -93,6 +94,12 @@ class rate_neuron_ipn : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< rate_neuron_ipn<TNonlinearities> , Archiving_Node >(NULL);
+  }
+
   typedef Node base;
 
   rate_neuron_ipn();

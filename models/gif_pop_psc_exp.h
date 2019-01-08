@@ -29,6 +29,7 @@
 #include "poisson_randomdev.h"
 #include "gsl_binomial_randomdev.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 #ifdef HAVE_GSL
 
@@ -135,6 +136,12 @@ class gif_pop_psc_exp : public Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< gif_pop_psc_exp, Node >(NULL);
+  }
+
   gif_pop_psc_exp();
   gif_pop_psc_exp( const gif_pop_psc_exp& );
 

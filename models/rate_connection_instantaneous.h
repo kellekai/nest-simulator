@@ -25,6 +25,7 @@
 #define RATE_CONNECTION_INSTANTANEOUS_H
 
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -66,6 +67,12 @@ class RateConnectionInstantaneous : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< RateConnectionInstantaneous< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   // this line determines which common properties to use
   typedef CommonSynapseProperties CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;

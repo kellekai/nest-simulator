@@ -36,6 +36,7 @@
 #include "device_node.h"
 #include "event.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -91,6 +92,12 @@ class music_event_in_proxy : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< music_event_in_proxy, DeviceNode >(NULL);
+  }
+
   music_event_in_proxy();
   music_event_in_proxy( const music_event_in_proxy& );
 

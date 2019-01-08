@@ -35,6 +35,7 @@
 #include "ring_buffer.h"
 #include "stimulating_device.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -88,6 +89,12 @@ class step_current_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< step_current_generator, DeviceNode >(NULL);
+  }
+
   step_current_generator();
   step_current_generator( const step_current_generator& );
 

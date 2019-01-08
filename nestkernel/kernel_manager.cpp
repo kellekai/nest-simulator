@@ -71,6 +71,9 @@ void
 nest::KernelManager::initialize()
 {
   logging_manager.initialize(); // must come first so others can log
+  
+  checkpoint_manager.initialize();
+
   io_manager.initialize();      // independent of others
 
   mpi_manager.initialize(); // set up inter-process communication

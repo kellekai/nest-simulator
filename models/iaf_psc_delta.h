@@ -30,6 +30,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -125,6 +126,12 @@ class iaf_psc_delta : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< iaf_psc_delta, Archiving_Node >(NULL);
+  }
+
   iaf_psc_delta();
   iaf_psc_delta( const iaf_psc_delta& );
 

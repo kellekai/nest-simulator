@@ -29,6 +29,7 @@
 #include "ring_buffer.h"
 #include "connection.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 #include "nest.h"
 
@@ -145,6 +146,12 @@ class gif_psc_exp : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< gif_psc_exp, Archiving_Node >(NULL);
+  }
+
   gif_psc_exp();
   gif_psc_exp( const gif_psc_exp& );
 

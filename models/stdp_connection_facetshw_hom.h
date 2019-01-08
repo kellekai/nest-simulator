@@ -29,6 +29,7 @@
 // Includes from nestkernel:
 #include "common_synapse_properties.h"
 #include "connection.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -211,6 +212,12 @@ class STDPFACETSHWConnectionHom : public Connection< targetidentifierT >
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< STDPFACETSHWConnectionHom< targetidentifierT >, Connection< targetidentifierT > >(NULL);
+  }
+
   typedef STDPFACETSHWHomCommonProperties< targetidentifierT >
     CommonPropertiesType;
   typedef Connection< targetidentifierT > ConnectionBase;

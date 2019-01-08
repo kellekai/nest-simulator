@@ -39,6 +39,7 @@
 #include "event.h"
 #include "exceptions.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -88,6 +89,12 @@ class music_event_out_proxy : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< music_event_out_proxy, DeviceNode >(NULL);
+  }
+
   music_event_out_proxy();
   music_event_out_proxy( const music_event_out_proxy& );
   ~music_event_out_proxy();

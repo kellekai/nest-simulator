@@ -40,6 +40,7 @@
 #include "exceptions.h"
 #include "kernel_manager.h"
 #include "universal_data_logger_impl.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dict.h"

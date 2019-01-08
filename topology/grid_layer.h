@@ -26,6 +26,8 @@
 // Includes from topology:
 #include "layer.h"
 
+#include "serialization.h"
+
 namespace nest
 {
 
@@ -35,6 +37,12 @@ template < int D >
 class GridLayer : public Layer< D >
 {
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< GridLayer< D >, Layer< D > >(NULL);
+  }
+
   typedef Position< D > key_type;
   typedef index mapped_type;
   typedef std::pair< Position< D >, index > value_type;

@@ -37,6 +37,7 @@
 #include "event.h"
 #include "nest_types.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -101,6 +102,12 @@ class poisson_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< poisson_generator, DeviceNode >(NULL);
+  }
+
   /**
    * The generator is threaded, so the RNG to use is determined
    * at run-time, depending on thread.

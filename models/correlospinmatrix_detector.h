@@ -33,6 +33,7 @@
 #include "nest_types.h"
 #include "node.h"
 #include "pseudo_recording_device.h"
+#include "serialization.h"
 
 
 namespace nest
@@ -141,6 +142,12 @@ class correlospinmatrix_detector : public Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< correlospinmatrix_detector, Node >(NULL);
+  }
+
   correlospinmatrix_detector();
   correlospinmatrix_detector( const correlospinmatrix_detector& );
 

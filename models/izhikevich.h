@@ -30,6 +30,7 @@
 #include "nest_types.h"
 #include "ring_buffer.h"
 #include "universal_data_logger.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -98,6 +99,12 @@ class izhikevich : public Archiving_Node
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< izhikevich, Archiving_Node >(NULL);
+  }
+
   izhikevich();
   izhikevich( const izhikevich& );
 

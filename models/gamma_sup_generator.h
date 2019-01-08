@@ -36,6 +36,7 @@
 #include "event.h"
 #include "nest_types.h"
 #include "stimulating_device.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -76,6 +77,12 @@ class gamma_sup_generator : public DeviceNode
 {
 
 public:
+  
+  static void register_cast()
+  {
+    boost::serialization::void_cast_register< gamma_sup_generator, DeviceNode >(NULL);
+  }
+
   gamma_sup_generator();
   gamma_sup_generator( const gamma_sup_generator& );
 
