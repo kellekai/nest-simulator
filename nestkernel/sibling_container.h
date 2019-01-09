@@ -30,6 +30,7 @@
 // Includes from nestkernel:
 #include "nest_types.h"
 #include "node.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
@@ -45,6 +46,12 @@ namespace nest
  */
 class SiblingContainer : public Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version )
+  {
+  }
+
 public:
   SiblingContainer();
 

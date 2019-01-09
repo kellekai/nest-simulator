@@ -135,6 +135,11 @@ public:
  */
 class music_message_in_proxy : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

@@ -72,7 +72,7 @@
 %/g      4.5  def    % rel strength, inhibitory synapses
 %/eta    0.95 def    % nu_ext / nu_thresh
 
-/simtime  1000.0 def % simulation time [ms]
+/simtime  100.0 def % simulation time [ms]
 /dt          0.1 def % simulation step length [ms]
 
 

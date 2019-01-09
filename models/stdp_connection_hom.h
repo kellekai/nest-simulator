@@ -135,6 +135,11 @@ public:
 template < typename targetidentifierT >
 class STDPConnectionHom : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

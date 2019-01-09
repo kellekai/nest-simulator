@@ -138,6 +138,11 @@ SeeAlso: hh_psc_alpha, hh_cond_exp_traub, gap_junction
 */
 class hh_psc_alpha_gap : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

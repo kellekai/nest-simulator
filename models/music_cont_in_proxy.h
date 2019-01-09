@@ -91,6 +91,11 @@ SeeAlso: music_event_out_proxy, music_event_in_proxy, music_message_in_proxy
 */
 class music_cont_in_proxy : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

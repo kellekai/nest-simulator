@@ -128,6 +128,11 @@ iaf_cond_alpha
 */
 class iaf_cond_exp_sfa_rr : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

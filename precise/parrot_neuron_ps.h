@@ -77,6 +77,11 @@ Author: adapted from parrot_neuron by Kunkel
 */
 class parrot_neuron_ps : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 public:
   
   static void register_cast()

@@ -148,6 +148,11 @@ public:
 template < typename targetidentifierT >
 class TsodyksConnectionHom : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 public:
   
   static void register_cast()

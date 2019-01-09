@@ -78,6 +78,12 @@ DOI: 10.1523/JNEUROSCI.4944-14.2015
 template < typename targetidentifierT >
 class BernoulliConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
+
 public:
   
   static void register_cast()

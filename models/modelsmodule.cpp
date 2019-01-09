@@ -229,6 +229,7 @@ ModelsModule::init( SLIInterpreter* )
   kernel().model_manager.register_node_model< iaf_chs_2007 >( "iaf_chs_2007" );
   kernel().model_manager.register_node_model< iaf_psc_alpha >(
     "iaf_psc_alpha" );
+
   kernel().model_manager.register_node_model< iaf_psc_alpha_multisynapse >(
     "iaf_psc_alpha_multisynapse" );
   kernel().model_manager.register_node_model< iaf_psc_delta >(

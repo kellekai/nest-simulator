@@ -136,6 +136,11 @@ SeeAlso: sinusoidal_poisson_generator, gamma_sup_generator
  */
 class sinusoidal_gamma_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

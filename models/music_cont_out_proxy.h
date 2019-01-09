@@ -100,6 +100,11 @@ music_message_in_proxy
 */
 class music_cont_out_proxy : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

@@ -71,6 +71,11 @@ SeeAlso: synapsedict
 template < typename targetidentifierT >
 class VogelsSprekelerConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

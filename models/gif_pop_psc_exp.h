@@ -134,6 +134,11 @@ SeeAlso: gif_psc_exp, pp_pop_psc_delta, spike_dilutor
 */
 class gif_pop_psc_exp : public Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

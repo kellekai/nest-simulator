@@ -755,6 +755,16 @@ nest::SimulationManager::update_()
 
     do
     {
+      // FTI CHECKPOINTING ADDITION
+      if ( to_do_ == 10 ) {
+          #pragma omp master
+          {
+            kernel().checkpoint_manager.store_data< NodeManager >( kernel().node_manager );
+          }
+          #pragma omp barrier
+          std::cout << "other stuff (both)..." << std::endl;
+      }
+
       if ( print_time_ )
       {
         gettimeofday( &t_slice_begin_, NULL );

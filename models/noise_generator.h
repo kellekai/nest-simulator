@@ -113,6 +113,11 @@ Author: Ported to NEST2 API 08/2007 by Jochen Eppler, updated 07/2008 by HEP
 */
 class noise_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

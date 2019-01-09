@@ -127,6 +127,11 @@ SeeAlso: iaf_psc_delta, aeif_cond_exp, aeif_psc_exp
 */
 class aeif_psc_delta : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

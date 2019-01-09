@@ -21,6 +21,7 @@
  */
 
 #include "iaf_psc_alpha.h"
+//BOOST_CLASS_EXPORT(nest::iaf_psc_alpha);
 
 // C++ includes:
 #include <limits>

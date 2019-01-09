@@ -69,6 +69,11 @@ SeeAlso: ht_neuron, tsodyks_synapse, stdp_synapse, static_synapse
 template < typename targetidentifierT >
 class HTConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 public:
   
   static void register_cast()

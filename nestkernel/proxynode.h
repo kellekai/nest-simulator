@@ -25,6 +25,7 @@
 
 // Includes from nestkernel:
 #include "node.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -50,6 +51,12 @@ Author: June 2005, Jochen Martin Eppler
  */
 class proxynode : public Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version )
+  {
+  }
+
 
 public:
   proxynode()

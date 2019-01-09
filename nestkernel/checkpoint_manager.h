@@ -6,6 +6,7 @@
 
 // Includes from nestkernel
 #include "kernel_manager.h"
+#include "node.h"
 
 // Includes from BOOST for serialization
 #include "serialization.h"
@@ -33,6 +34,12 @@ namespace nest {
       virtual void set_status( const DictionaryDatum& );
       virtual void get_status( DictionaryDatum& );
       
+      template< typename T >
+      void store_data( T & data )
+      { 
+        *oa_ << data;
+      }
+
       template< typename Class >
       void register_type()
       {
@@ -40,21 +47,23 @@ namespace nest {
           std::cout << "CheckpointManager::register_type :: Serialization Manager is not initialized!" << std::endl;
           return;
         }
-        oa_->register_type< Class >(NULL);
-        ia_->register_type< Class >(NULL);
+        std::cout << "TRYREGISTER " << typeid(Class).name() << std::endl;
+        oa_->register_type< Class >();
+        ia_->register_type< Class >();
       }
       template< typename Derived, typename Base >
       void register_cast() 
       {
         boost::serialization::void_cast_register< Derived, Base >();
       }
+      
+      BOOST_OARCHIVE *oa_;
+      BOOST_IARCHIVE *ia_;
 
     private:
       
       bool initialized_;
 
-      BOOST_OARCHIVE *oa_;
-      BOOST_IARCHIVE *ia_;
       std::stringstream fn_;
       std::stringstream ss_;
 

@@ -63,6 +63,11 @@ SeeAlso: rate_connection_instantaneous, rate_neuron_ipn, rate_neuron_opn
 template < typename targetidentifierT >
 class RateConnectionDelayed : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

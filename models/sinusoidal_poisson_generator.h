@@ -92,6 +92,11 @@ SeeAlso: poisson_generator, sinusoidal_gamma_generator
 */
 class sinusoidal_poisson_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

@@ -97,6 +97,11 @@ Author: Thomas Heiberg, Birgit Kriener
 */
 class iaf_chs_2007 : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

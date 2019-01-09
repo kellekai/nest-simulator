@@ -75,6 +75,11 @@ SeeAlso: siegert_neuron, rate_connection_instantaneous
 template < typename targetidentifierT >
 class DiffusionConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

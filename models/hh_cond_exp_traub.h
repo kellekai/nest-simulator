@@ -133,6 +133,11 @@ SeeAlso: hh_psc_alpha
 */
 class hh_cond_exp_traub : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

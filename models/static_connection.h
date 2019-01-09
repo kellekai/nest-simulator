@@ -52,6 +52,11 @@ SeeAlso: synapsedict, tsodyks_synapse, stdp_synapse
 template < typename targetidentifierT >
 class StaticConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
   double weight_;
 
 public:

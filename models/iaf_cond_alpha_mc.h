@@ -163,6 +163,11 @@ SeeAlso: iaf_cond_alpha
 */
 class iaf_cond_alpha_mc : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
   // Boilerplate function declarations --------------------------------
 

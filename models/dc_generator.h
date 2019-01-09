@@ -75,6 +75,11 @@ SeeAlso: Device, StimulatingDevice
 */
 class dc_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

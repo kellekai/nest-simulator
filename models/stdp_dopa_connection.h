@@ -164,6 +164,11 @@ STDPDopaCommonProperties::get_vt_gid() const
 template < typename targetidentifierT >
 class STDPDopaConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

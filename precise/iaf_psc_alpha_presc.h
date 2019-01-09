@@ -111,6 +111,11 @@ SeeAlso: iaf_psc_alpha, iaf_psc_alpha_canon, iaf_psc_delta_canon
 */
 class iaf_psc_alpha_presc : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 public:
   
   static void register_cast()

@@ -100,6 +100,11 @@ SeeAlso: synapsedict, tsodyks_synapse, static_synapse
 template < typename targetidentifierT >
 class STDPConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

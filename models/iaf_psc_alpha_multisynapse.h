@@ -64,6 +64,11 @@ iaf_psc_exp_multisynapse
 */
 class iaf_psc_alpha_multisynapse : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

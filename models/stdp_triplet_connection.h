@@ -98,6 +98,11 @@ SeeAlso: stdp_triplet_synapse_hpc, synapsedict, stdp_synapse, static_synapse
 template < typename targetidentifierT >
 class STDPTripletConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

@@ -62,6 +62,11 @@ SeeAlso: mip_generator
 */
 class spike_dilutor : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

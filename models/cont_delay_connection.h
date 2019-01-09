@@ -96,6 +96,11 @@ SeeAlso: synapsedict, static_synapse, iaf_psc_alpha_canon
 template < typename targetidentifierT >
 class ContDelayConnection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

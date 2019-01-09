@@ -95,6 +95,11 @@ SeeAlso: lin_rate, tanh_rate, threshold_lin_rate
 template < class TNonlinearities >
 class rate_neuron_opn : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

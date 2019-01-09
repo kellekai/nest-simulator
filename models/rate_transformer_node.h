@@ -86,6 +86,11 @@ FirstVersion: November 2017
 template < class TNonlinearities >
 class rate_transformer_node : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

@@ -40,6 +40,7 @@
 #include "nest_types.h"
 #include "node.h"
 #include "synaptic_element.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
@@ -56,9 +57,23 @@ namespace nest
  */
 class Archiving_Node : public Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version )
+  {
+  }
+
   using Node::get_synaptic_elements;
+  
+protected:
+
+  virtual void init_state_( Node const& ) {}
+  virtual void init_buffers_() {}
 
 public:
+  
+  virtual void calibrate() {}
+  virtual void update( Time const&, const long, const long ) {}
   /**
    * \fn Archiving_Node()
    * Constructor.

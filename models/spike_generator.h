@@ -183,6 +183,11 @@ SeeAlso: Device, StimulatingDevice, testsuite::test_spike_generator
 */
 class spike_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

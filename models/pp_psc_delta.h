@@ -177,6 +177,11 @@ iaf_psc_delta_canon
 */
 class pp_psc_delta : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

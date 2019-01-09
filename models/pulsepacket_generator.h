@@ -73,6 +73,11 @@ SeeAlso: spike_generator, StimulatingDevice
 */
 class pulsepacket_generator : public Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

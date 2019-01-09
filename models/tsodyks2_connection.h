@@ -92,6 +92,11 @@ SeeAlso: tsodyks_synapse, synapsedict, stdp_synapse, static_synapse
 template < typename targetidentifierT >
 class Tsodyks2Connection : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 public:
   
   static void register_cast()

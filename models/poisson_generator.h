@@ -100,6 +100,11 @@ SeeAlso: poisson_generator_ps, Device, parrot_neuron
 */
 class poisson_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

@@ -73,6 +73,11 @@ SeeAlso: synapsedict, hh_psc_alpha_gap
 template < typename targetidentifierT >
 class GapJunction : public Connection< targetidentifierT >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

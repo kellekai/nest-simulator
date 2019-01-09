@@ -36,6 +36,11 @@ namespace nest
 template < int D >
 class GridLayer : public Layer< D >
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 public:
   
   static void register_cast()

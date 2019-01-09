@@ -66,6 +66,11 @@ SeeAlso: weight_recorder, spike_detector, Device, RecordingDevice
 */
 class weight_recorder : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

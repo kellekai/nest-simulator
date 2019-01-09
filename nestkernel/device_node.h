@@ -25,6 +25,7 @@
 
 // Includes from nestkernel:
 #include "node.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -34,8 +35,21 @@ namespace nest
  */
 class DeviceNode : public Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version )
+  {
+  }
+protected: 
+  virtual void init_state_( Node const& ) {}
+  virtual void init_buffers_() {}
 
 public:
+  virtual void calibrate() {}
+  virtual void update( Time const&, const long, const long ) {}
+  virtual void set_status( const DictionaryDatum& ) {}
+  virtual void get_status( DictionaryDatum& ) const {}
+  
   DeviceNode()
     : Node()
     , local_device_id_( invalid_index )

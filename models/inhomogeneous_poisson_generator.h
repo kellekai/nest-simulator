@@ -83,6 +83,11 @@ SeeAlso: sinusoidal_poisson_generator, step_current_generator, Device,
 */
 class inhomogeneous_poisson_generator : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

@@ -71,6 +71,11 @@ SeeAlso: poisson_generator, spike_generator, Device, StimulatingDevice
 */
 class poisson_generator_ps : public DeviceNode
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

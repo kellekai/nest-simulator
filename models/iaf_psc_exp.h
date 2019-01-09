@@ -136,6 +136,11 @@ Author: Moritz Helias
 */
 class iaf_psc_exp : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

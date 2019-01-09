@@ -33,6 +33,7 @@
 #include "conn_builder.h"
 #include "nest_types.h"
 #include "sparse_node_array.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "arraydatum.h"
@@ -48,6 +49,14 @@ class Model;
 
 class NodeManager : public ManagerInterface
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version )
+  {
+    ar & wfr_nodes_vec_;
+    ar & nodes_vec_;
+  }
+
 public:
   NodeManager();
   ~NodeManager();

@@ -65,12 +65,17 @@ namespace nest
 template < class TGainfunction >
 class binary_neuron : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   
   static void register_cast()
   {
-    boost::serialization::void_cast_register< binary_neuron, Archiving_Node >(NULL);
+    boost::serialization::void_cast_register< binary_neuron< TGainfunction >, Archiving_Node >(NULL);
   }
 
   binary_neuron();

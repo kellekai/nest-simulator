@@ -131,6 +131,11 @@ SeeAlso: iaf_psc_alpha, aeif_cond_exp
 */
 class aeif_psc_alpha : public Archiving_Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   

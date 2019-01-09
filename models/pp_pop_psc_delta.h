@@ -151,6 +151,11 @@ gamma_sup_generator
 */
 class pp_pop_psc_delta : public Node
 {
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) 
+  {
+  }
 
 public:
   
