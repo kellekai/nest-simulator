@@ -107,6 +107,17 @@ class Node
   template< typename Archive >
   void serialize( Archive & ar, unsigned int version )
   {
+    ar & gid_;
+    ar & lid_;
+    ar & subnet_index_;
+    ar & thread_lid_;
+    ar & model_id_;
+    ar & parent_;           
+    ar & thread_;            
+    ar & vp_;                
+    ar & frozen_;              
+    ar & buffers_initialized_; 
+    ar & node_uses_wfr_;       
   }
 
   friend class NodeManager;
@@ -288,7 +299,7 @@ public:
    * for spike handling or updating the node.
    *
    */
-  virtual void calibrate() {}// = 0;
+  virtual void calibrate() = 0;
 
   /**
    * Cleanup node after Run. Override this function if a node needs to
@@ -324,7 +335,7 @@ public:
    * @param long post-final step inside time slice
    *
    */
-  virtual void update( Time const&, const long, const long )  {}//= 0;
+  virtual void update( Time const&, const long, const long ) = 0;
 
   /**
    * Bring the node from state $t$ to $t+n*dt$, sends SecondaryEvents
@@ -366,7 +377,7 @@ public:
    * @param d Dictionary with named parameter settings.
    * @ingroup status_interface
    */
-  virtual void set_status( const DictionaryDatum& )  {}//= 0;
+  virtual void set_status( const DictionaryDatum& ) = 0;
 
   /**
    * Export properties of the node by setting
@@ -374,7 +385,7 @@ public:
    * @param d Dictionary.
    * @ingroup status_interface
    */
-  virtual void get_status( DictionaryDatum& ) const  {}//= 0;
+  virtual void get_status( DictionaryDatum& ) const = 0;
 
 public:
   /**
@@ -894,7 +905,7 @@ protected:
    *       scheme, init_state_() has a default implementation calling
    *       init_dynamic_state_().
    */
-  virtual void init_state_( Node const& )  {}//= 0;
+  virtual void init_state_( Node const& ) = 0;
 
   /**
    * Private function to initialize the buffers of a node.
@@ -902,7 +913,7 @@ protected:
    * the implementation for initializing the buffers of a node.
    * @see Node::init_buffers()
    */
-  virtual void init_buffers_()  {}//= 0;
+  virtual void init_buffers_() = 0;
 
   Model& get_model_() const;
 

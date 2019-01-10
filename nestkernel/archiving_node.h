@@ -64,16 +64,8 @@ class Archiving_Node : public Node
   }
 
   using Node::get_synaptic_elements;
-  
-protected:
-
-  virtual void init_state_( Node const& ) {}
-  virtual void init_buffers_() {}
 
 public:
-  
-  virtual void calibrate() {}
-  virtual void update( Time const&, const long, const long ) {}
   /**
    * \fn Archiving_Node()
    * Constructor.

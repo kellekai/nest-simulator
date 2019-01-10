@@ -212,6 +212,14 @@ public:
    */
   virtual void remove_disabled_connections(
     const index first_disabled_index ) = 0;
+
+private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) 
+  {
+  }
+
 };
 
 /**
@@ -221,10 +229,21 @@ template < typename ConnectionT >
 class Connector : public ConnectorBase
 {
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    ar & C_;
+  }
   BlockVector< ConnectionT > C_;
   const synindex syn_id_;
 
 public:
+
+  Connector()
+    : syn_id_( 0 )
+  {
+  }
+  
   explicit Connector( const synindex syn_id )
     : syn_id_( syn_id )
   {

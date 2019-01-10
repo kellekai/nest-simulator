@@ -33,9 +33,11 @@ namespace nest {
 
       virtual void set_status( const DictionaryDatum& );
       virtual void get_status( DictionaryDatum& );
-      
+     
+      virtual void write_checkpoint();
+
       template< typename T >
-      void store_data( T & data )
+      void expose_data( T & data )
       { 
         *oa_ << data;
       }
@@ -57,15 +59,19 @@ namespace nest {
         boost::serialization::void_cast_register< Derived, Base >();
       }
       
+    private:
+      
+      int id_;
+
       BOOST_OARCHIVE *oa_;
       BOOST_IARCHIVE *ia_;
 
-    private:
-      
       bool initialized_;
 
       std::stringstream fn_;
       std::stringstream ss_;
+
+      std::ofstream fs_;
 
   };
 

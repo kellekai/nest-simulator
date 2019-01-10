@@ -28,6 +28,7 @@
 
 // Includes from nestkernel:
 #include "nest_types.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -40,6 +41,20 @@ namespace nest
 class Source
 {
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    uint64_t S_gid_ = gid_;
+    bool S_processed_ = processed_;
+    bool S_primary_ = primary_;
+    ar & S_gid_;
+    ar & S_processed_;
+    ar & S_primary_;
+    gid_ = S_gid_;
+    processed_ = S_processed_;
+    primary_ = S_primary_;
+  }
+
   uint64_t gid_ : 62;  //!< gid of source
   bool processed_ : 1; //!< whether this target has already been moved
                        //!to the MPI buffer

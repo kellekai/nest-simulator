@@ -37,6 +37,7 @@
 
 // Includes from nestkernel:
 #include "nest_types.h"
+#include "serialization.h"
 
 class Token;
 
@@ -176,6 +177,12 @@ public:
   /////////////////////////////////////////////////////////////
 
 protected:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive & ar, const unsigned int version ) {
+    ar & tics;
+  }
+
   tic_t tics;
 
   /////////////////////////////////////////////////////////////

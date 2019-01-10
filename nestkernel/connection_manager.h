@@ -41,6 +41,7 @@
 #include "source_table.h"
 #include "target_table.h"
 #include "target_table_devices.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "arraydatum.h"
@@ -418,6 +419,30 @@ public:
   void set_stdp_eps( const double stdp_eps );
 
 private:
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version )
+  {
+    ar & connections_;
+    ar & source_table_;
+    ar & secondary_recv_buffer_pos_;
+    ar & buffer_pos_of_source_gid_syn_id_;
+    ar & target_table_;
+    ar & target_table_devices_;
+    //ar & delay_checkers_;
+    ar & num_connections_;
+    //DictionaryDatum connruledict_;
+    //std::vector< GenericConnBuilderFactory* > connbuilder_factories_;
+    ar & min_delay_;
+    ar & max_delay_;
+    ar & keep_source_table_;
+    ar & have_connections_changed_;
+    ar & sort_connections_by_source_;
+    ar & has_primary_connections_;
+    ar & secondary_connections_exist_;
+    ar & stdp_eps_;
+  }
+
   size_t get_num_target_data( const thread tid ) const;
 
   size_t get_num_connections_( const thread tid, const synindex syn_id ) const;

@@ -30,6 +30,8 @@
 
 #include "block_vector.h"
 
+#include "serialization.h"
+
 namespace nest
 {
 
@@ -50,6 +52,14 @@ struct SourceTablePosition
     const std::vector< std::vector< BlockVector< T > > >& sources );
 
   bool is_at_end() const;
+private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    ar & tid;
+    ar & syn_id;
+    ar & lcid;
+  }
 };
 
 inline SourceTablePosition::SourceTablePosition()

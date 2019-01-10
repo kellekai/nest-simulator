@@ -37,6 +37,7 @@
 #include "node.h"
 #include "spikecounter.h"
 #include "syn_id_delay.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "arraydatum.h"
@@ -320,6 +321,15 @@ protected:
   targetidentifierT target_;
   //! syn_id (char) and delay (24 bit) in timesteps of this connection
   SynIdDelay syn_id_delay_;
+
+private:
+
+  friend class boost::serialization::access;
+  template< typename Archive >
+  void serialize( Archive & ar, unsigned int version ) {
+      ar & target_;
+      ar & syn_id_delay_;
+  }
 };
 
 

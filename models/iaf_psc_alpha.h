@@ -137,7 +137,11 @@ class iaf_psc_alpha : public Archiving_Node
   template< typename Archive >
   void serialize( Archive & ar, unsigned int version ) 
   {
-      std::cout << "CORRECT" << std::endl;
+      std::cout << "[INFO] :: Serializing node :: type -> " << get_name() << " gid -> " << get_gid() << std::endl;
+      ar & boost::serialization::base_object<Archiving_Node>(*this);
+      ar & S_;
+      ar & V_;
+      ar & B_;
   }
 
 public:
@@ -254,6 +258,17 @@ private:
      * @param Change in reversal potential E_L specified by this dict
      */
     void set( const DictionaryDatum&, const Parameters_&, double );
+  
+    template <typename Archive>
+    void serialize( Archive &ar, const unsigned int version ) {
+      ar & y0_; //!< Constant current
+      ar & dI_ex_;
+      ar & I_ex_;
+      ar & dI_in_;
+      ar & I_in_;
+      ar & y3_;
+      ar & r_; //!< Number of refractory steps remaining
+    }
   };
 
   // ----------------------------------------------------------------
@@ -271,6 +286,14 @@ private:
 
     //! Logger for all analog data
     UniversalDataLogger< iaf_psc_alpha > logger_;
+    
+    template<typename Archive>
+    void serialize( Archive & ar, const unsigned int version ) {
+      ar & logger_;
+      ar & ex_spikes_;
+      ar & in_spikes_;
+      ar & currents_;
+    }
   };
 
   // ----------------------------------------------------------------
@@ -302,6 +325,29 @@ private:
 
     double weighted_spikes_ex_;
     double weighted_spikes_in_;
+
+    template<typename Archive>
+    void serialize( Archive &ar, const unsigned int version ) {
+      ar & EPSCInitialValue_;
+      ar & IPSCInitialValue_;
+      ar & RefractoryCounts_;
+      ar & P11_ex_;
+      ar & P21_ex_;
+      ar & P22_ex_;
+      ar & P31_ex_;
+      ar & P32_ex_;
+      ar & P11_in_;
+      ar & P21_in_;
+      ar & P22_in_;
+      ar & P31_in_;
+      ar & P32_in_;
+      ar & P30_;
+      ar & P33_;
+      ar & expm1_tau_m_;
+      ar & weighted_spikes_ex_;
+      ar & weighted_spikes_in_;
+    }
+
   };
 
   // Access functions for UniversalDataLogger -------------------------------

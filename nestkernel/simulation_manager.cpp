@@ -759,10 +759,10 @@ nest::SimulationManager::update_()
       if ( to_do_ == 10 ) {
           #pragma omp master
           {
-            kernel().checkpoint_manager.store_data< NodeManager >( kernel().node_manager );
+            kernel().checkpoint_manager.expose_data< NodeManager >( kernel().node_manager );
+            kernel().checkpoint_manager.expose_data< ConnectionManager >( kernel().connection_manager );
+            kernel().checkpoint_manager.write_checkpoint();
           }
-          #pragma omp barrier
-          std::cout << "other stuff (both)..." << std::endl;
       }
 
       if ( print_time_ )

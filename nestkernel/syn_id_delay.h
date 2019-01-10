@@ -26,6 +26,7 @@
 // Includes from nestkernel:
 #include "nest_time.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -104,6 +105,25 @@ struct SynIdDelay
   {
     return disabled;
   }
+
+  private:
+    
+    friend class boost::serialization::access;
+    template< typename Archive >
+    void serialize( Archive & ar, unsigned int version ) {
+       unsigned int S_delay = delay;
+       unsigned int S_syn_id = syn_id;
+       bool S_subsequent_targets = subsequent_targets;
+       bool S_disabled = disabled;
+       ar & S_delay;
+       ar & S_syn_id;
+       ar & S_subsequent_targets;
+       ar & S_disabled;
+       delay = S_delay;
+       syn_id = S_syn_id;
+       subsequent_targets = S_subsequent_targets;
+       disabled = S_disabled;
+    }
 };
 }
 

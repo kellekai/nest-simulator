@@ -25,6 +25,7 @@
 
 // Includes from nestkernel:
 #include "nest_time.h"
+#include "serialization.h"
 
 // Includes from sli:
 #include "dictdatum.h"
@@ -86,6 +87,15 @@ public:
   void set_status( const DictionaryDatum& );
 
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    ar & min_delay_;
+    ar & max_delay_;
+    ar & user_set_delay_extrema_;
+    ar & freeze_delay_update_;
+  }
+
   Time min_delay_;              //!< Minimal delay of all created synapses.
   Time max_delay_;              //!< Maximal delay of all created synapses.
   bool user_set_delay_extrema_; //!< Flag indicating if the user set the delay

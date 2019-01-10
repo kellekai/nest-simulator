@@ -31,6 +31,7 @@
 #include "kernel_manager.h"
 #include "nest_time.h"
 #include "nest_types.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -134,6 +135,13 @@ public:
   }
 
 private:
+    
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive & ar, const unsigned int version ) {
+      ar & buffer_;
+  }
+
   //! Buffered data
   std::vector< double > buffer_;
 

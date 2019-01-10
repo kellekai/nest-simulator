@@ -30,6 +30,7 @@
 #include "nest_types.h"
 #include "static_assert.h"
 #include "exceptions.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -76,6 +77,12 @@ enum enum_status_target_id
 class Target
 {
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    ar & remote_target_id_;
+  }
+  
   uint64_t remote_target_id_;
 
   // define the structure of the remote target neuron identifier

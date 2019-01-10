@@ -686,11 +686,22 @@ public:
    */
   struct Item
   {
+    Item() 
+    {
+    }
     Item( size_t n )
       : data( n, std::numeric_limits< double >::max() )
       , timestamp( Time::neg_inf() )
     {
     }
+    
+    // FTI CHECKPOINTING ADDITION
+    template<typename Archive>
+    void serialize( Archive & ar, const unsigned int version ) {
+        ar & data;
+        ar & timestamp;
+    }
+
     DataItem data;
     Time timestamp;
   };

@@ -36,6 +36,7 @@
 #include "nest_types.h"
 #include "source.h"
 #include "source_table_position.h"
+#include "serialization.h"
 
 // Includes from libnestutil
 #include "block_vector.h"
@@ -62,6 +63,15 @@ class TargetData;
 class SourceTable
 {
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    ar & sources_;
+    ar & is_cleared_;
+    ar & current_positions_;
+    ar & saved_positions_;
+    ar & saved_entry_point_;
+  }
   /**
    * 3D structure storing gids of presynaptic neurons.
    */

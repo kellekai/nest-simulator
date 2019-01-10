@@ -28,6 +28,7 @@
 // Includes from libnestutil:
 #include "compose.hpp"
 #include "string_utils.h"
+#include "connector_base.h"
 
 // Includes from nestkernel:
 #include "connection_label.h"
@@ -113,6 +114,7 @@ void
 ModelManager::register_connection_model( const std::string& name,
   const bool requires_symmetric )
 {
+  kernel().checkpoint_manager.register_type< Connector< ConnectionT > >();
   boost::serialization::void_cast_register< Connector< ConnectionT >, ConnectorBase >(); 
   ConnectionT::register_cast();
   std::cout << "REGISTER: " << typeid(ConnectionT).name() << " (Conn.) " << std::endl;

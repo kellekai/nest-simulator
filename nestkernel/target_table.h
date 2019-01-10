@@ -34,6 +34,7 @@
 #include "spike_data.h"
 #include "target.h"
 #include "target_data.h"
+#include "serialization.h"
 
 namespace nest
 {
@@ -45,6 +46,12 @@ namespace nest
 class TargetTable
 {
 private:
+  friend class boost::serialization::access;
+  template<typename Archive>
+  void serialize( Archive &ar, unsigned int version ) {
+    ar & targets_;
+    ar & secondary_send_buffer_pos_;
+  }
   /**
    * Stores targets of local neurons
    * Three dimensional objects:
