@@ -756,7 +756,7 @@ nest::SimulationManager::update_()
     do
     {
       // FTI CHECKPOINTING ADDITION
-      if ( to_do_%10 == 0 ) {
+      if ( to_do_ == 10 ) {
           #pragma omp master
           {
             kernel().checkpoint_manager.expose_data< NodeManager >( kernel().node_manager );
