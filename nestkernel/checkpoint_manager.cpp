@@ -16,9 +16,7 @@ void nest::CheckpointManager::initialize()
     std::cout << "[WARNING] CheckpointManager is already initialized!" << std::endl;
     return;
   }
-
-  initialized_ = true;
-  
+ 
   // set checkpoint file name
   fn_ << "Ckpt" << id_ << "-Rank" << kernel().mpi_manager.get_rank() << ".fti";  
   
@@ -26,6 +24,8 @@ void nest::CheckpointManager::initialize()
   oa_ = new BOOST_OARCHIVE(ss_);
   ia_ = new BOOST_IARCHIVE(ss_);
 
+  initialized_ = true;
+  
   // register basic types and casts
   //register_type<nest::Node>();
   //register_type<nest::Archiving_Node>();
@@ -43,15 +43,28 @@ void nest::CheckpointManager::initialize()
 
 void nest::CheckpointManager::write_checkpoint()
 {
-    fs_.open(fn_.str());
-    fs_ << ss_.str();
-    fs_.close();
+    size_t dsize = ss_.str().size();
+    char *ptr = new char[dsize];
+    std::strncpy(ptr, ss_.str().c_str(), dsize+1);
+    FTI_Protect( 0, ptr, dsize, FTI_CHAR );
+    FTI_Checkpoint( id_, 1 );
+    delete[] ptr;
+    ss_.str("");
+    ss_.clear();
+    //fs_.open(fn_.str());
+    //fs_ << ss_.str();
+    //fs_.close();
     id_ ++;
-    fn_ << "Ckpt" << id_ << "-Rank" << kernel().mpi_manager.get_rank() << ".fti";  
+    //fn_ << "Ckpt" << id_ << "-Rank" << kernel().mpi_manager.get_rank() << ".fti";  
 }
 
 void nest::CheckpointManager::finalize()
 {
+}
+
+void nest::CheckpointManager::finalize_fti()
+{
+  FTI_Finalize();
 }
 
 void nest::CheckpointManager::set_status( const DictionaryDatum& )
@@ -66,6 +79,7 @@ nest::CheckpointManager::CheckpointManager()
   : initialized_(false)
   , id_(0)
   , fn_("")
+  , config_file( FTI_CONFIG_FILE )
 {
 }
 

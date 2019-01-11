@@ -112,6 +112,12 @@ nest::MPIManager::init_mpi( int* argc, char** argv[] )
 #endif /* #ifdef HAVE_MUSIC */
   }
 
+#ifdef HAVE_MUSIC
+  kernel().checkpoint_manager.init_fti< MPI::Intracomm >( comm );
+#else
+  kernel().checkpoint_manager.init_fti< MPI_Comm >( comm );
+#endif
+
   MPI_Comm_size( comm, &num_processes_ );
   MPI_Comm_rank( comm, &rank_ );
 
@@ -237,6 +243,10 @@ void
 nest::MPIManager::mpi_finalize( int exitcode )
 {
 #ifdef HAVE_MPI
+
+  // finalize FTI
+  kernel().checkpoint_manager.finalize_fti();
+  
   MPI_Type_free( &MPI_OFFGRID_SPIKE );
 
   int finalized;

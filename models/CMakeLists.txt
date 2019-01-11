@@ -127,6 +127,7 @@ target_include_directories( models PRIVATE
     ${PROJECT_SOURCE_DIR}/librandom
     ${PROJECT_SOURCE_DIR}/sli
     ${PROJECT_SOURCE_DIR}/nestkernel
+    ${FTI_INCLUDE_DIR}
     )
 
 install( TARGETS models

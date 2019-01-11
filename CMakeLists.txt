@@ -107,6 +107,8 @@ endif ()
 ################################################################################
 
 find_package( Boost COMPONENTS serialization REQUIRED )
+find_package( FTI REQUIRED )
+include_directories( ${FTI_INCLUDE_DIR} )
 
 ################################################################################
 ##################           Find utility programs            ##################
@@ -292,7 +294,9 @@ set( ALL_LIBS
   "${LIBNEUROSIM_LIBRARIES}"
   "${MUSIC_LIBRARIES}"
   "${MPI_CXX_LIBRARIES}" 
-  "${Boost_LIBRARIES}" )
+  "${Boost_LIBRARIES}"
+  "${FTI_DYNAMIC_LIB}"
+  )
 if ( with-libraries )
   set( ALL_LIBS "${ALL_LIBS};${with-libraries}" )
 endif ()
@@ -307,7 +311,8 @@ set( ALL_INCLUDES_tmp
   "${LIBNEUROSIM_INCLUDE_DIRS}"
   "${MUSIC_INCLUDE_DIRS}"
   "${MPI_CXX_INCLUDE_PATH}" 
-  "${Boost_INCLUDE_DIR}" )
+  "${Boost_INCLUDE_DIR}"
+  "${FTI_INCLUDE_DIR}")
 set( ALL_INCLUDES "" )
 foreach ( INC ${ALL_INCLUDES_tmp} ${with-includes} )
   if ( INC AND NOT INC STREQUAL "" )

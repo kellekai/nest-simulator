@@ -71,6 +71,7 @@ class StaticConnectionHomW : public Connection< targetidentifierT >
   template< typename Archive >
   void serialize( Archive & ar, unsigned int version ) 
   {
+      ar & boost::serialization::base_object< Connection< targetidentifierT > >(*this);
   }
 
 public:

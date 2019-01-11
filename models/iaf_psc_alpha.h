@@ -137,7 +137,7 @@ class iaf_psc_alpha : public Archiving_Node
   template< typename Archive >
   void serialize( Archive & ar, unsigned int version ) 
   {
-      std::cout << "[INFO] :: Serializing node :: type -> " << get_name() << " gid -> " << get_gid() << std::endl;
+      //std::cout << "[INFO] :: Serializing node :: type -> " << get_name() << " gid -> " << get_gid() << std::endl;
       ar & boost::serialization::base_object<Archiving_Node>(*this);
       ar & S_;
       ar & V_;
